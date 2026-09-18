@@ -1,0 +1,10 @@
+{
+  "name": "r5-forum-visual",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Presentacion interactiva del Forum UPB sobre relevo generacional.",
+  "scripts": {
+    "build": "node -e \"const fs=require('fs'); const files=['index.html','styles.css','main.js','visualSystem.js','config.js','moments.js']; for (const file of files) { if (!fs.existsSync(file)) throw new Error('Falta el archivo: '+file); } console.log('Build OK: archivos estaticos listos.');\"",
+    "start": "npx --yes serve ."
+  }
+}
