@@ -4,31 +4,35 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fórum UPB | Relevo generacional</title>
-    <link rel="stylesheet" href="./styles.css?v=portable-4" />
+    <link rel="stylesheet" href="./styles.css?v=composicion-1" />
   </head>
   <body>
     <main class="stage-shell" aria-label="Experiencia TED Talk Fórum UPB">
       <section class="stage" id="stage">
         <canvas id="visual-canvas" aria-hidden="true"></canvas>
 
+        <figure class="moment-asset" id="moment-asset" aria-hidden="true">
+          <img id="moment-image" alt="" />
+        </figure>
+
         <div class="grain" aria-hidden="true"></div>
         <div class="vignette" aria-hidden="true"></div>
 
         <div class="brand-lockup" aria-label="UPB Forum y 90 años">
           <img class="brand-logo brand-logo-forum" src="./assets/brand-forum.png" alt="UPB Fórum Centro de Eventos" />
-          <span class="brand-divider" aria-hidden="true"></span>
           <img class="brand-logo brand-logo-90" src="./assets/brand-90.png" alt="90 años" />
         </div>
 
+        <!-- El bloque se coloca sobre la zona de lectura del momento activo,
+             declarada por main.js como variables CSS en #stage. -->
         <section class="copy-layer" aria-live="polite">
-          <p class="eyebrow" id="moment-kicker">Future Leaders Forum · Fórum UPB</p>
+          <p class="chapter" id="moment-kicker">
+            <span class="chapter-index" id="chapter-index">01</span>
+            <span class="chapter-name" id="chapter-name"></span>
+          </p>
           <h1 id="moment-title"></h1>
           <p class="subtitle" id="moment-subtitle"></p>
         </section>
-
-        <figure class="moment-asset" id="moment-asset" aria-hidden="true">
-          <img id="moment-image" alt="" />
-        </figure>
 
         <aside class="qr-layer" id="qr-layer" aria-label="Enlaces de cierre">
           <a class="qr-block" id="qr-memory-link" href="#" target="_blank" rel="noopener noreferrer">
@@ -40,6 +44,12 @@
             <span id="qr-social-label">@centrodeeventosupb</span>
           </a>
         </aside>
+
+        <!-- Trece marcas: dónde va la charla y cuánto falta. -->
+        <div class="progress-rail" id="progress-rail" aria-hidden="true"></div>
+
+        <!-- Estado real del sistema. Se abre con la tecla D. Oculto por defecto. -->
+        <div class="debug-panel" id="debug-panel" aria-hidden="true"></div>
 
         <nav class="operator-ui" id="operator-ui" aria-label="Controles de operacion">
           <button class="icon-button" id="prev-button" type="button" aria-label="Momento anterior" title="Anterior">
@@ -67,6 +77,7 @@
           <span>F fullscreen</span>
           <span>H ayuda</span>
           <span>R reiniciar</span>
+          <span>D datos</span>
           <div class="mobile-counter" aria-label="Momento actual en móvil">
             <span id="mobile-moment-number">01</span>
             <span>/</span>
@@ -83,9 +94,9 @@
       </section>
     </main>
 
-    <script src="./config.js?v=portable-4"></script>
-    <script src="./moments.js?v=portable-4"></script>
-    <script src="./visualSystem.js?v=portable-4"></script>
-    <script src="./main.js?v=portable-4"></script>
+    <script src="./config.js?v=composicion-1"></script>
+    <script src="./moments.js?v=composicion-1"></script>
+    <script src="./visualSystem.js?v=composicion-1"></script>
+    <script src="./main.js?v=composicion-1"></script>
   </body>
 </html>

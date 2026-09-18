@@ -1,11 +1,57 @@
+/* ============================================================================
+   Fórum UPB · "Relevo generacional"
+   GUION, PARTITURA Y COMPOSICIÓN
+
+   La secuencia narrativa del cliente NO se modifica. Lo que cambia en cada
+   momento son las reglas de relación del organismo y el encuadre del texto:
+
+     gravity      convocatoria de Fórum (0 = nadie convoca, 1 = todo gravita)
+     clumping     aislamiento generacional (1 = dos masas separadas)
+     elasticity   CONFIANZA: umbral, rigidez y número de vínculos
+     exploration  búsqueda de rutas nuevas
+     intensity    energía / velocidad del momento
+
+   · layout       Dónde vive el texto. No es decoración: la zona de lectura
+                  es una fuerza del sistema y el organismo se reorganiza
+                  alrededor de ella. Las composiciones disponibles están en
+                  main.js (LAYOUTS). El ritmo de la charla se construye
+                  alternándolas:
+
+                  opening       apertura, texto grande abajo a la izquierda
+                  counterpoint  texto arriba: para preguntas y giros
+                  wide          bloque medio-izquierda para frases largas
+                  anchor        pie de imagen, texto abajo sobre la foto
+                  beat          TESIS: texto centrado, el organismo lo rodea
+                  closing       cierre, texto a la izquierda y QR a la derecha
+
+                  Los cuatro "beat" caen exactamente en las cuatro frases que
+                  sostienen el argumento. Son las únicas veces que la
+                  audiencia mira al centro de la pantalla: por eso pesan.
+
+   El campo "note" explica la decisión estructural. No se usa en pantalla:
+   está para la bitácora y para sustentar el proyecto.
+
+   Nota de color: el verde de marca (#1d7e3a, de la web de FLF) es muy oscuro
+   y en proyector, compuesto en "lighten" sobre negro y con luz de sala, se
+   lee como barro. Se usa #2aa85c, la misma tonalidad elevada en luminosidad.
+   El hex original se conserva en CONFIG.palette como referencia de marca.
+============================================================================ */
+
 window.languageLabels = {
   es: "ES",
   pt: "PT",
 };
 
+const FLF_CYAN = "#00a2e0";
+const FLF_RED = "#f04b3a";
+const FLF_PINK = "#ec779c";
+const FLF_GREEN = "#2aa85c"; // verde de marca elevado para proyección
+const FORUM_INK = "#f7f7f4";
+
 window.moments = [
   {
     id: "relevo-generacional",
+    layout: "opening",
     copy: {
       es: {
         kicker: "Future Leaders Forum · Fórum UPB",
@@ -19,18 +65,22 @@ window.moments = [
       },
     },
     state: "latent",
-    intensity: 0.46,
-    colors: ["#08a9dd", "#f7353f", "#e96daa"],
+    intensity: 0.2,
+    colors: [FLF_CYAN, FLF_RED, FLF_PINK],
     behavior: {
-      spiral: 0.4,
-      network: 0.06,
-      architecture: 0,
-      archive: 0,
-      stability: 0.28,
+      gravity: 0.1,
+      clumping: 1.0,
+      elasticity: 0.1,
+      exploration: 0.1,
     },
+    note:
+      "Punto de partida: dos masas generacionales separadas y sin red. Con " +
+      "elasticity 0.1 solo pueden existir enlaces cruzados, y son escasos y " +
+      "flojos. La ventaja que nadie aprovecha se ve como una ausencia.",
   },
   {
     id: "auditorio-grados",
+    layout: "counterpoint",
     copy: {
       es: {
         kicker: "Espacio",
@@ -45,23 +95,27 @@ window.moments = [
     },
     asset: {
       type: "image",
-      src: "./assets/ceremonia-grados-placeholder.png",
+      src: "./assets/slide-02-grados.webp",
       alt: "Ceremonia de grados en un auditorio universitario",
       placement: "background",
     },
-    state: "architecture",
-    intensity: 0.34,
-    colors: ["#f7f7f4", "#08a9dd", "#e96daa"],
+    state: "isolation",
+    intensity: 0.3,
+    colors: [FORUM_INK, FLF_CYAN, FLF_PINK],
     behavior: {
-      spiral: 0.14,
-      network: 0.02,
-      architecture: 0.2,
-      archive: 0,
-      stability: 0.78,
+      gravity: 0.15,
+      clumping: 0.9,
+      elasticity: 0.0,
+      exploration: 0.1,
     },
+    note:
+      "Confianza en cero: la estructura desaparece por completo, quedan " +
+      "cuerpos sueltos. Un espacio de un solo uso no teje relaciones. El " +
+      "texto sube: la pregunta encabeza, la fotografía responde debajo.",
   },
   {
     id: "universidad-mundo",
+    layout: "wide",
     copy: {
       es: {
         kicker: "Encuentro",
@@ -74,19 +128,23 @@ window.moments = [
         subtitle: "",
       },
     },
-    state: "opening",
-    intensity: 0.56,
-    colors: ["#08a9dd", "#f7f7f4", "#f7353f"],
+    state: "attraction",
+    intensity: 0.5,
+    colors: [FLF_CYAN, FORUM_INK, FLF_RED],
     behavior: {
-      spiral: 0.5,
-      network: 0.045,
-      architecture: 0,
-      archive: 0.04,
-      stability: 0.12,
+      gravity: 0.6,
+      clumping: 0.6,
+      elasticity: 0.2,
+      exploration: 0.3,
     },
+    note:
+      "La decisión institucional entra como gravedad: aparece un foco que " +
+      "convoca. Los primeros vínculos que se forman son cruzados, no entre " +
+      "iguales.",
   },
   {
     id: "academia-industria-ciudad",
+    layout: "beat",
     copy: {
       es: {
         kicker: "Tres fuerzas",
@@ -99,19 +157,23 @@ window.moments = [
         subtitle: "",
       },
     },
-    state: "triad",
-    intensity: 0.64,
-    colors: ["#08a9dd", "#f7353f", "#e96daa"],
+    state: "mixing",
+    intensity: 0.6,
+    colors: [FLF_CYAN, FLF_RED, FLF_GREEN],
     behavior: {
-      spiral: 0.42,
-      network: 0.34,
-      architecture: 0,
-      archive: 0.08,
-      stability: 0.5,
+      gravity: 0.7,
+      clumping: 0.3,
+      elasticity: 0.4,
+      exploration: 0.4,
     },
+    note:
+      "Único momento con tres polos en vez de uno. Con el texto al centro, " +
+      "los tres núcleos se reparten a su alrededor y la frase queda " +
+      "literalmente sostenida por las tres fuerzas que nombra.",
   },
   {
     id: "impacto",
+    layout: "anchor",
     copy: {
       es: {
         kicker: "Impacto",
@@ -124,19 +186,28 @@ window.moments = [
         subtitle: "",
       },
     },
-    state: "impact",
-    intensity: 0.7,
-    colors: ["#f7353f", "#e96daa", "#f7f7f4"],
-    behavior: {
-      spiral: 0.52,
-      network: 0.46,
-      architecture: 0,
-      archive: 0.08,
-      stability: 0.38,
+    asset: {
+      type: "image",
+      src: "./assets/slide-05-impacto.webp",
+      alt: "Evento con actores institucionales y empresariales reunidos",
+      placement: "background",
     },
+    state: "impact",
+    intensity: 0.8,
+    colors: [FLF_RED, FLF_PINK, FORUM_INK],
+    behavior: {
+      gravity: 0.8,
+      clumping: 0.1,
+      elasticity: 0.6,
+      exploration: 0.5,
+    },
+    note:
+      "Máxima convocatoria y red ya densa: el impacto no es la reunión, es " +
+      "lo que la red transmite cuando alguien se mueve.",
   },
   {
     id: "comunidad",
+    layout: "wide",
     copy: {
       es: {
         kicker: "Comunidad",
@@ -150,18 +221,22 @@ window.moments = [
       },
     },
     state: "community",
-    intensity: 0.74,
-    colors: ["#08a9dd", "#e96daa", "#f7f7f4"],
+    intensity: 0.7,
+    colors: [FLF_GREEN, FLF_PINK, FLF_CYAN],
     behavior: {
-      spiral: 0.56,
-      network: 0.9,
-      architecture: 0,
-      archive: 0.12,
-      stability: 0.58,
+      gravity: 0.5,
+      clumping: 0.0,
+      elasticity: 0.8,
+      exploration: 0.6,
     },
+    note:
+      "La gravedad baja y la cohesión no se pierde: ya no los sostiene el " +
+      "foco, los sostienen sus vínculos. Esa es la diferencia entre un " +
+      "evento y una comunidad.",
   },
   {
     id: "confianza",
+    layout: "beat",
     copy: {
       es: {
         kicker: "Confianza",
@@ -175,18 +250,23 @@ window.moments = [
       },
     },
     state: "trust",
-    intensity: 0.8,
-    colors: ["#08a9dd", "#e96daa", "#f7353f"],
+    intensity: 0.9,
+    colors: [FLF_CYAN, FLF_PINK, FLF_RED],
     behavior: {
-      spiral: 0.5,
-      network: 0.98,
-      architecture: 0,
-      archive: 0,
-      stability: 0.96,
+      gravity: 0.4,
+      clumping: 0.0,
+      elasticity: 1.0,
+      exploration: 0.7,
     },
+    note:
+      "Confianza total: se superan los dos umbrales, aparecen también los " +
+      "vínculos entre iguales y la red alcanza su densidad máxima. Texto " +
+      "centrado dentro de la red más densa de toda la charla: la frase y el " +
+      "parámetro son literalmente lo mismo.",
   },
   {
     id: "nuevas-rutas",
+    layout: "wide",
     copy: {
       es: {
         kicker: "Rutas",
@@ -199,19 +279,30 @@ window.moments = [
         subtitle: "",
       },
     },
-    state: "routes",
-    intensity: 0.7,
-    colors: ["#08a9dd", "#f7353f", "#e96daa"],
-    behavior: {
-      spiral: 0.62,
-      network: 0.52,
-      architecture: 0,
-      archive: 0,
-      stability: 0.54,
+    asset: {
+      type: "image",
+      src: "./assets/slide-08-rutas.webp",
+      alt: "Mesas de trabajo y conversaciones en comunidad",
+      placement: "background",
     },
+    state: "routes",
+    intensity: 0.75,
+    colors: [FLF_CYAN, FLF_RED, FLF_PINK],
+    behavior: {
+      gravity: 0.3,
+      clumping: 0.0,
+      elasticity: 0.7,
+      exploration: 1.0,
+    },
+    note:
+      "Exploración al máximo, pero no para todos: la experiencia la recibe " +
+      "al 45% y mantiene el trazo grueso; las nuevas generaciones aceleran y " +
+      "se disparan. Los enlaces impiden que se desprendan: descubren sin " +
+      "romperse.",
   },
   {
     id: "vision-generaciones",
+    layout: "beat",
     copy: {
       es: {
         kicker: "Relevo",
@@ -225,18 +316,22 @@ window.moments = [
       },
     },
     state: "duality",
-    intensity: 0.78,
-    colors: ["#f7f7f4", "#08a9dd", "#f7353f"],
+    intensity: 0.6,
+    colors: [FORUM_INK, FLF_CYAN, FLF_RED],
     behavior: {
-      spiral: 0.58,
-      network: 0.18,
-      architecture: 0,
-      archive: 0,
-      stability: 0.88,
+      gravity: 0.5,
+      clumping: 0.4,
+      elasticity: 0.8,
+      exploration: 0.5,
     },
+    note:
+      "Con el texto al centro, el eje de aislamiento gira a vertical: las " +
+      "dos generaciones se acomodan arriba y abajo de la frase, unidas por " +
+      "vínculos cruzados que la atraviesan. Dos masas, una sola estructura.",
   },
   {
     id: "trabajan-juntas",
+    layout: "wide",
     copy: {
       es: {
         kicker: "Composición",
@@ -250,18 +345,22 @@ window.moments = [
       },
     },
     state: "convergence",
-    intensity: 0.84,
-    colors: ["#08a9dd", "#f7353f", "#e96daa"],
+    intensity: 0.85,
+    colors: [FLF_CYAN, FLF_RED, FLF_PINK],
     behavior: {
-      spiral: 0.72,
-      network: 0.94,
-      architecture: 0,
-      archive: 0.04,
-      stability: 0.78,
+      gravity: 0.6,
+      clumping: 0.0,
+      elasticity: 0.9,
+      exploration: 0.8,
     },
+    note:
+      "Ninguna partícula murió en toda la presentación: eso es la tesis. No " +
+      "hay reemplazo posible porque el sistema no tiene ciclo de vida, solo " +
+      "readaptación.",
   },
   {
     id: "presente-joven",
+    layout: "counterpoint",
     copy: {
       es: {
         kicker: "Presente",
@@ -275,18 +374,22 @@ window.moments = [
       },
     },
     state: "present",
-    intensity: 0.86,
-    colors: ["#f7353f", "#08a9dd", "#f7f7f4"],
+    intensity: 0.9,
+    colors: [FLF_RED, FLF_CYAN, FORUM_INK],
     behavior: {
-      spiral: 0.78,
-      network: 0.72,
-      architecture: 0,
-      archive: 0.06,
-      stability: 0.42,
+      gravity: 0.4,
+      clumping: 0.0,
+      elasticity: 0.7,
+      exploration: 0.9,
     },
+    note:
+      "El estado 'present' invierte el brillo: la experiencia se atenúa y " +
+      "las nuevas generaciones toman el primer plano. El texto vuelve arriba " +
+      "para que el organismo joven ocupe todo el cuerpo de la pantalla.",
   },
   {
     id: "futuro-construido",
+    layout: "beat",
     copy: {
       es: {
         kicker: "Futuro construido",
@@ -299,19 +402,29 @@ window.moments = [
         subtitle: "",
       },
     },
-    state: "future",
-    intensity: 0.96,
-    colors: ["#f7f7f4", "#08a9dd", "#f7353f"],
-    behavior: {
-      spiral: 0.96,
-      network: 0.96,
-      architecture: 0,
-      archive: 0,
-      stability: 0.64,
+    asset: {
+      type: "image",
+      src: "./assets/slide-12-futuro.webp",
+      alt: "Auditorio Forum UPB preparado para un evento",
+      placement: "background",
     },
+    state: "future",
+    intensity: 1.0,
+    colors: [FLF_GREEN, FLF_CYAN, FLF_PINK],
+    behavior: {
+      gravity: 0.5,
+      clumping: 0.0,
+      elasticity: 1.0,
+      exploration: 1.0,
+    },
+    note:
+      "Red cristalina: enlaces más marcados y energía máxima, rodeando la " +
+      "frase final. No se hereda una forma, se sostiene una estructura en " +
+      "movimiento.",
   },
   {
     id: "qr-cierre",
+    layout: "closing",
     copy: {
       es: {
         kicker: "Continuidad",
@@ -324,15 +437,23 @@ window.moments = [
         subtitle: "",
       },
     },
-    state: "qr",
-    intensity: 0.86,
-    colors: ["#f7f7f4", "#08a9dd", "#f7353f"],
-    behavior: {
-      spiral: 0.98,
-      network: 0.98,
-      architecture: 0,
-      archive: 0,
-      stability: 0.86,
+    asset: {
+      type: "image",
+      src: "./assets/slide-13-cierre.webp",
+      alt: "Campus UPB al atardecer",
+      placement: "background",
     },
+    state: "qr",
+    intensity: 0.5,
+    colors: [FORUM_INK, FLF_CYAN, FLF_RED],
+    behavior: {
+      gravity: 0.8,
+      clumping: 0.0,
+      elasticity: 0.9,
+      exploration: 0.2,
+    },
+    note:
+      "Reposo con estructura: baja la exploración, se mantienen los vínculos. " +
+      "La red queda quieta pero entera, disponible para quien quiera entrar.",
   },
 ];
